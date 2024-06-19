@@ -75,9 +75,14 @@ void *handle_client(void *arg) {
         }
     }
 
+    // Enviar mensagem de finalização
+    snprintf(buf, BUFSZ, "END");
+    sendto(s, buf, strlen(buf), 0, (struct sockaddr *)&client_addr, client_addr_len);
+
     sem_post(&semaphore);
     return NULL;
 }
+
 
 void *display_client_count(void *arg) {
     while (1) {

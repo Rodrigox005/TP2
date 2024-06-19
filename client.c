@@ -32,10 +32,15 @@ void receive_messages(int s) {
             printf("Servidor desconectado.\n");
             break;
         } else {
+            buf[count] = '\0';
+            if (strcmp(buf, "END") == 0) {
+                break;
+            }
             printf("Frase do servidor: %s\n", buf);
         }
     }
 }
+
 
 int main(int argc, char **argv) {
     if (argc < 3) {
